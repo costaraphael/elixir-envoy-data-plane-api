@@ -7,10 +7,8 @@ ENVOY_DATA_PLANE_GIT_REV ?= 78221529ed5219934ab5a79caf7b8fd4efc265e8
 
 ENVOY_DATA_PLANE_DIR ?= $(BUILD_CACHE)/$(ENVOY_DATA_PLANE_GIT_REV)
 
-.PHONY: build
-
-build: $(ENVOY_DATA_PLANE_DIR)
-	echo ok
+gen: $(ENVOY_DATA_PLANE_DIR)
+	buf generate $(ENVOY_DATA_PLANE_DIR) --include-imports --path $(ENVOY_DATA_PLANE_DIR)/envoy
 
 $(ENVOY_DATA_PLANE_DIR):
 	mkdir -p $(ENVOY_DATA_PLANE_DIR) && \
@@ -19,3 +17,6 @@ $(ENVOY_DATA_PLANE_DIR):
 		git remote add origin $(ENVOY_DATA_PLANE_REPO) && \
 		git fetch --depth 1 origin $(ENVOY_DATA_PLANE_GIT_REV) && \
 		git checkout FETCH_HEAD
+
+clean:
+	rm -rf gen $(ENVOY_DATA_PLANE_DIR)

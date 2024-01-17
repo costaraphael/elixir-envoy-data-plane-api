@@ -1,0 +1,7 @@
+version: v1
+plugins:
+  - plugin: elixir
+    out: gen
+    opt:
+      - plugins=grpc
+      - include_docs=true

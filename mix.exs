@@ -7,8 +7,10 @@ defmodule EnvoyDataPlaneApi.MixProject do
       version: "0.1.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
-      compilers: [:elixir_make] ++ Mix.compilers(),
-      deps: deps()
+      compilers: Mix.compilers(),
+      elixirc_paths: ["lib", "gen"],
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -20,7 +22,16 @@ defmodule EnvoyDataPlaneApi.MixProject do
 
   defp deps do
     [
-      {:elixir_make, "~> 0.7.7", runtime: false}
+      {:protobuf, "~> 0.12.0"},
+      {:grpc, "~> 0.7"},
+      {:google_protos, "~> 0.3"},
+      {:jason, "~> 1.0"}
+    ]
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README.md", "LICENSE", "gen", "Makefile"]
     ]
   end
 end
