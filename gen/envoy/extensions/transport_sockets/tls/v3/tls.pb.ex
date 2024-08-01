@@ -70,6 +70,8 @@ defmodule Envoy.Extensions.TransportSockets.Tls.V3.DownstreamTlsContext do
   field :full_scan_certs_on_sni_mismatch, 9,
     type: Google.Protobuf.BoolValue,
     json_name: "fullScanCertsOnSniMismatch"
+
+  field :prefer_client_ciphers, 11, type: :bool, json_name: "preferClientCiphers"
 end
 
 defmodule Envoy.Extensions.TransportSockets.Tls.V3.TlsKeyLog do
@@ -154,6 +156,10 @@ defmodule Envoy.Extensions.TransportSockets.Tls.V3.CommonTlsContext do
   field :tls_certificate_provider_instance, 14,
     type: Envoy.Extensions.TransportSockets.Tls.V3.CertificateProviderPluginInstance,
     json_name: "tlsCertificateProviderInstance"
+
+  field :custom_tls_certificate_selector, 16,
+    type: Envoy.Config.Core.V3.TypedExtensionConfig,
+    json_name: "customTlsCertificateSelector"
 
   field :tls_certificate_certificate_provider, 9,
     type: Envoy.Extensions.TransportSockets.Tls.V3.CommonTlsContext.CertificateProvider,

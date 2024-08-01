@@ -402,6 +402,10 @@ defmodule Envoy.Config.Route.V3.CorsPolicy do
   field :allow_private_network_access, 12,
     type: Google.Protobuf.BoolValue,
     json_name: "allowPrivateNetworkAccess"
+
+  field :forward_not_matching_preflights, 13,
+    type: Google.Protobuf.BoolValue,
+    json_name: "forwardNotMatchingPreflights"
 end
 
 defmodule Envoy.Config.Route.V3.RouteAction.RequestMirrorPolicy do
@@ -415,6 +419,10 @@ defmodule Envoy.Config.Route.V3.RouteAction.RequestMirrorPolicy do
     json_name: "runtimeFraction"
 
   field :trace_sampled, 4, type: Google.Protobuf.BoolValue, json_name: "traceSampled"
+
+  field :disable_shadow_host_suffix_append, 6,
+    type: :bool,
+    json_name: "disableShadowHostSuffixAppend"
 end
 
 defmodule Envoy.Config.Route.V3.RouteAction.HashPolicy.Header do

@@ -50,6 +50,8 @@ defmodule Envoy.Admin.V3.CommandLineOptions do
 
   field :base_id, 1, type: :uint64, json_name: "baseId"
   field :use_dynamic_base_id, 31, type: :bool, json_name: "useDynamicBaseId"
+  field :skip_hot_restart_on_no_parent, 39, type: :bool, json_name: "skipHotRestartOnNoParent"
+  field :skip_hot_restart_parent_stats, 40, type: :bool, json_name: "skipHotRestartParentStats"
   field :base_id_path, 32, type: :string, json_name: "baseIdPath"
   field :concurrency, 2, type: :uint32
   field :config_path, 3, type: :string, json_name: "configPath"

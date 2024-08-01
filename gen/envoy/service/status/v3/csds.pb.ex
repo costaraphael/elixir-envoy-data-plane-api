@@ -106,6 +106,8 @@ defmodule Envoy.Service.Status.V3.ClientConfig do
     repeated: true,
     type: Envoy.Service.Status.V3.ClientConfig.GenericXdsConfig,
     json_name: "genericXdsConfigs"
+
+  field :client_scope, 4, type: :string, json_name: "clientScope"
 end
 
 defmodule Envoy.Service.Status.V3.ClientStatusResponse do

@@ -5,12 +5,17 @@ defmodule Envoy.Service.ExtProc.V3.CommonResponse.ResponseStatus do
   field :CONTINUE_AND_REPLACE, 1
 end
 
+defmodule Envoy.Service.ExtProc.V3.ProcessingRequest.AttributesEntry do
+  use Protobuf, map: true, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :key, 1, type: :string
+  field :value, 2, type: Google.Protobuf.Struct
+end
+
 defmodule Envoy.Service.ExtProc.V3.ProcessingRequest do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
   oneof :request, 0
-
-  field :async_mode, 1, type: :bool, json_name: "asyncMode"
 
   field :request_headers, 2,
     type: Envoy.Service.ExtProc.V3.HttpHeaders,
@@ -41,6 +46,15 @@ defmodule Envoy.Service.ExtProc.V3.ProcessingRequest do
     type: Envoy.Service.ExtProc.V3.HttpTrailers,
     json_name: "responseTrailers",
     oneof: 0
+
+  field :metadata_context, 8, type: Envoy.Config.Core.V3.Metadata, json_name: "metadataContext"
+
+  field :attributes, 9,
+    repeated: true,
+    type: Envoy.Service.ExtProc.V3.ProcessingRequest.AttributesEntry,
+    map: true
+
+  field :observability_mode, 10, type: :bool, json_name: "observabilityMode"
 end
 
 defmodule Envoy.Service.ExtProc.V3.ProcessingResponse do
@@ -109,7 +123,8 @@ defmodule Envoy.Service.ExtProc.V3.HttpHeaders do
   field :attributes, 2,
     repeated: true,
     type: Envoy.Service.ExtProc.V3.HttpHeaders.AttributesEntry,
-    map: true
+    map: true,
+    deprecated: true
 
   field :end_of_stream, 3, type: :bool, json_name: "endOfStream"
 end
@@ -169,7 +184,7 @@ defmodule Envoy.Service.ExtProc.V3.ImmediateResponse do
 
   field :status, 1, type: Envoy.Type.V3.HttpStatus, deprecated: false
   field :headers, 2, type: Envoy.Service.ExtProc.V3.HeaderMutation
-  field :body, 3, type: :string
+  field :body, 3, type: :bytes
   field :grpc_status, 4, type: Envoy.Service.ExtProc.V3.GrpcStatus, json_name: "grpcStatus"
   field :details, 5, type: :string
 end

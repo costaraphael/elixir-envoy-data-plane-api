@@ -16,6 +16,18 @@ defmodule Envoy.Extensions.Filters.Http.AwsLambda.V3.Config do
     json_name: "invocationMode",
     enum: true,
     deprecated: false
+
+  field :host_rewrite, 4, type: :string, json_name: "hostRewrite"
+  field :credentials_profile, 5, type: :string, json_name: "credentialsProfile"
+  field :credentials, 6, type: Envoy.Extensions.Filters.Http.AwsLambda.V3.Credentials
+end
+
+defmodule Envoy.Extensions.Filters.Http.AwsLambda.V3.Credentials do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :access_key_id, 1, type: :string, json_name: "accessKeyId", deprecated: false
+  field :secret_access_key, 2, type: :string, json_name: "secretAccessKey", deprecated: false
+  field :session_token, 3, type: :string, json_name: "sessionToken"
 end
 
 defmodule Envoy.Extensions.Filters.Http.AwsLambda.V3.PerRouteConfig do

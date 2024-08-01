@@ -69,6 +69,14 @@ defmodule Envoy.Config.Cluster.V3.Cluster.RingHashLbConfig.HashFunction do
   field :MURMUR_HASH_2, 1
 end
 
+defmodule Envoy.Config.Cluster.V3.UpstreamConnectionOptions.FirstAddressFamilyVersion do
+  use Protobuf, enum: true, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :DEFAULT, 0
+  field :V4, 1
+  field :V6, 2
+end
+
 defmodule Envoy.Config.Cluster.V3.ClusterCollection do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
@@ -519,6 +527,11 @@ defmodule Envoy.Config.Cluster.V3.Cluster do
 
   field :lrs_server, 42, type: Envoy.Config.Core.V3.ConfigSource, json_name: "lrsServer"
 
+  field :lrs_report_endpoint_metrics, 57,
+    repeated: true,
+    type: :string,
+    json_name: "lrsReportEndpointMetrics"
+
   field :track_timeout_budgets, 47,
     type: :bool,
     json_name: "trackTimeoutBudgets",
@@ -555,6 +568,20 @@ defmodule Envoy.Config.Cluster.V3.LoadBalancingPolicy do
   field :policies, 1, repeated: true, type: Envoy.Config.Cluster.V3.LoadBalancingPolicy.Policy
 end
 
+defmodule Envoy.Config.Cluster.V3.UpstreamConnectionOptions.HappyEyeballsConfig do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :first_address_family_version, 1,
+    type: Envoy.Config.Cluster.V3.UpstreamConnectionOptions.FirstAddressFamilyVersion,
+    json_name: "firstAddressFamilyVersion",
+    enum: true
+
+  field :first_address_family_count, 2,
+    type: Google.Protobuf.UInt32Value,
+    json_name: "firstAddressFamilyCount",
+    deprecated: false
+end
+
 defmodule Envoy.Config.Cluster.V3.UpstreamConnectionOptions do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
@@ -563,6 +590,10 @@ defmodule Envoy.Config.Cluster.V3.UpstreamConnectionOptions do
   field :set_local_interface_name_on_upstream_connections, 2,
     type: :bool,
     json_name: "setLocalInterfaceNameOnUpstreamConnections"
+
+  field :happy_eyeballs_config, 3,
+    type: Envoy.Config.Cluster.V3.UpstreamConnectionOptions.HappyEyeballsConfig,
+    json_name: "happyEyeballsConfig"
 end
 
 defmodule Envoy.Config.Cluster.V3.TrackClusterStats do

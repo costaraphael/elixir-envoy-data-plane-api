@@ -65,6 +65,7 @@ defmodule Envoy.Extensions.Filters.Http.Oauth2.V3.OAuth2Config do
     deprecated: false
 
   field :forward_bearer_token, 7, type: :bool, json_name: "forwardBearerToken"
+  field :preserve_authorization_header, 16, type: :bool, json_name: "preserveAuthorizationHeader"
 
   field :pass_through_matcher, 8,
     repeated: true,
@@ -82,6 +83,17 @@ defmodule Envoy.Extensions.Filters.Http.Oauth2.V3.OAuth2Config do
 
   field :use_refresh_token, 12, type: Google.Protobuf.BoolValue, json_name: "useRefreshToken"
   field :default_expires_in, 13, type: Google.Protobuf.Duration, json_name: "defaultExpiresIn"
+
+  field :deny_redirect_matcher, 14,
+    repeated: true,
+    type: Envoy.Config.Route.V3.HeaderMatcher,
+    json_name: "denyRedirectMatcher"
+
+  field :default_refresh_token_expires_in, 15,
+    type: Google.Protobuf.Duration,
+    json_name: "defaultRefreshTokenExpiresIn"
+
+  field :disable_id_token_set_cookie, 17, type: :bool, json_name: "disableIdTokenSetCookie"
 end
 
 defmodule Envoy.Extensions.Filters.Http.Oauth2.V3.OAuth2 do

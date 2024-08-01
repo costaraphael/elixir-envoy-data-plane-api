@@ -21,5 +21,9 @@ defmodule Envoy.Config.Trace.V3.ZipkinConfig do
     enum: true
 
   field :collector_hostname, 6, type: :string, json_name: "collectorHostname"
-  field :split_spans_for_request, 7, type: :bool, json_name: "splitSpansForRequest"
+
+  field :split_spans_for_request, 7,
+    type: :bool,
+    json_name: "splitSpansForRequest",
+    deprecated: true
 end

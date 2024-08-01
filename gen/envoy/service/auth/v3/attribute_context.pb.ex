@@ -43,7 +43,13 @@ defmodule Envoy.Service.Auth.V3.AttributeContext.HttpRequest do
   field :headers, 3,
     repeated: true,
     type: Envoy.Service.Auth.V3.AttributeContext.HttpRequest.HeadersEntry,
-    map: true
+    map: true,
+    deprecated: false
+
+  field :header_map, 13,
+    type: Envoy.Config.Core.V3.HeaderMap,
+    json_name: "headerMap",
+    deprecated: false
 
   field :path, 4, type: :string
   field :host, 5, type: :string

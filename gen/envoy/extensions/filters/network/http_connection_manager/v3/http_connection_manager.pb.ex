@@ -351,6 +351,7 @@ defmodule Envoy.Extensions.Filters.Network.HttpConnectionManager.V3.HttpConnecti
     json_name: "typedHeaderValidationConfig"
 
   field :append_x_forwarded_port, 51, type: :bool, json_name: "appendXForwardedPort"
+  field :append_local_overload, 57, type: :bool, json_name: "appendLocalOverload"
 
   field :add_proxy_protocol_connection_state, 53,
     type: Google.Protobuf.BoolValue,

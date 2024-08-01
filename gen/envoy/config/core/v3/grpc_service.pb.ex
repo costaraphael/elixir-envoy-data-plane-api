@@ -4,6 +4,12 @@ defmodule Envoy.Config.Core.V3.GrpcService.EnvoyGrpc do
   field :cluster_name, 1, type: :string, json_name: "clusterName", deprecated: false
   field :authority, 2, type: :string, deprecated: false
   field :retry_policy, 3, type: Envoy.Config.Core.V3.RetryPolicy, json_name: "retryPolicy"
+
+  field :max_receive_message_length, 4,
+    type: Google.Protobuf.UInt32Value,
+    json_name: "maxReceiveMessageLength"
+
+  field :skip_envoy_headers, 5, type: :bool, json_name: "skipEnvoyHeaders"
 end
 
 defmodule Envoy.Config.Core.V3.GrpcService.GoogleGrpc.SslCredentials do
@@ -188,4 +194,6 @@ defmodule Envoy.Config.Core.V3.GrpcService do
     repeated: true,
     type: Envoy.Config.Core.V3.HeaderValue,
     json_name: "initialMetadata"
+
+  field :retry_policy, 6, type: Envoy.Config.Core.V3.RetryPolicy, json_name: "retryPolicy"
 end

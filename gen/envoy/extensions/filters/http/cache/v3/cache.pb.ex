@@ -31,4 +31,8 @@ defmodule Envoy.Extensions.Filters.Http.Cache.V3.CacheConfig do
     json_name: "keyCreatorParams"
 
   field :max_body_bytes, 4, type: :uint32, json_name: "maxBodyBytes"
+
+  field :ignore_request_cache_control_header, 6,
+    type: :bool,
+    json_name: "ignoreRequestCacheControlHeader"
 end

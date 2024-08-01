@@ -3,5 +3,6 @@ defmodule Envoy.Extensions.Filters.Http.AlternateProtocolsCache.V3.FilterConfig 
 
   field :alternate_protocols_cache_options, 1,
     type: Envoy.Config.Core.V3.AlternateProtocolsCacheOptions,
-    json_name: "alternateProtocolsCacheOptions"
+    json_name: "alternateProtocolsCacheOptions",
+    deprecated: true
 end

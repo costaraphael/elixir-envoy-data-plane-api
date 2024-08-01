@@ -27,4 +27,8 @@ defmodule Envoy.Extensions.Filters.Http.Cors.V3.CorsPolicy do
   field :allow_private_network_access, 9,
     type: Google.Protobuf.BoolValue,
     json_name: "allowPrivateNetworkAccess"
+
+  field :forward_not_matching_preflights, 10,
+    type: Google.Protobuf.BoolValue,
+    json_name: "forwardNotMatchingPreflights"
 end

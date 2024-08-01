@@ -113,6 +113,11 @@ defmodule Envoy.Config.Rbac.V3.Permission do
     oneof: 0
 
   field :matcher, 12, type: Envoy.Config.Core.V3.TypedExtensionConfig, oneof: 0
+
+  field :uri_template, 13,
+    type: Envoy.Config.Core.V3.TypedExtensionConfig,
+    json_name: "uriTemplate",
+    oneof: 0
 end
 
 defmodule Envoy.Config.Rbac.V3.Principal.Set do

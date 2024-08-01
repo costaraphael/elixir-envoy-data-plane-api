@@ -17,4 +17,5 @@ defmodule Envoy.Extensions.Filters.Network.ExtAuthz.V3.ExtAuthz do
     json_name: "filterEnabledMetadata"
 
   field :bootstrap_metadata_labels_key, 7, type: :string, json_name: "bootstrapMetadataLabelsKey"
+  field :include_tls_session, 8, type: :bool, json_name: "includeTlsSession"
 end

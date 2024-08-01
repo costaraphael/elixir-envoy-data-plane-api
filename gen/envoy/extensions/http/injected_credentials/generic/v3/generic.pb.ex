@@ -1,4 +1,4 @@
-defmodule Envoy.Extensions.InjectedCredentials.Generic.V3.Generic do
+defmodule Envoy.Extensions.Http.InjectedCredentials.Generic.V3.Generic do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
   field :credential, 1,

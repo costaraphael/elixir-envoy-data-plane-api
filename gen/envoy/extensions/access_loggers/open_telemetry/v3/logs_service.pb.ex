@@ -14,4 +14,6 @@ defmodule Envoy.Extensions.AccessLoggers.OpenTelemetry.V3.OpenTelemetryAccessLog
 
   field :body, 2, type: Opentelemetry.Proto.Common.V1.AnyValue
   field :attributes, 3, type: Opentelemetry.Proto.Common.V1.KeyValueList
+  field :stat_prefix, 6, type: :string, json_name: "statPrefix"
+  field :formatters, 7, repeated: true, type: Envoy.Config.Core.V3.TypedExtensionConfig
 end

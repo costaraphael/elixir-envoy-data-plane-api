@@ -34,4 +34,12 @@ defmodule Envoy.Config.Listener.V3.QuicProtocolOptions do
     type: Envoy.Config.Core.V3.TypedExtensionConfig,
     json_name: "serverPreferredAddressConfig",
     deprecated: false
+
+  field :send_disable_active_migration, 10,
+    type: Google.Protobuf.BoolValue,
+    json_name: "sendDisableActiveMigration"
+
+  field :connection_debug_visitor_config, 11,
+    type: Envoy.Config.Core.V3.TypedExtensionConfig,
+    json_name: "connectionDebugVisitorConfig"
 end

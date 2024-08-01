@@ -4,7 +4,7 @@ defmodule EnvoyDataPlaneApi.MixProject do
   def project do
     [
       app: :envoy_data_plane_api,
-      version: "0.1.0",
+      version: "0.2.0",
       description: "Elixir protobuf definitions for Envoy's data plane API",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
@@ -25,8 +25,8 @@ defmodule EnvoyDataPlaneApi.MixProject do
   defp deps do
     [
       {:protobuf, "~> 0.12.0"},
-      {:grpc, "~> 0.7"},
-      {:google_protos, "~> 0.3"},
+      {:grpc, "~> 0.9"},
+      {:google_protos, "~> 0.4"},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false}
     ]
   end

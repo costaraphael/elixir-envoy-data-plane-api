@@ -263,6 +263,7 @@ defmodule Envoy.Data.Accesslog.V3.ResponseFlags do
   field :no_cluster_found, 25, type: :bool, json_name: "noClusterFound"
   field :overload_manager, 26, type: :bool, json_name: "overloadManager"
   field :dns_resolution_failure, 27, type: :bool, json_name: "dnsResolutionFailure"
+  field :downstream_remote_reset, 28, type: :bool, json_name: "downstreamRemoteReset"
 end
 
 defmodule Envoy.Data.Accesslog.V3.TLSProperties.CertificateProperties.SubjectAltName do

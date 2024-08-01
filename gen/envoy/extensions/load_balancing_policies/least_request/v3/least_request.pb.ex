@@ -1,3 +1,10 @@
+defmodule Envoy.Extensions.LoadBalancingPolicies.LeastRequest.V3.LeastRequest.SelectionMethod do
+  use Protobuf, enum: true, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :N_CHOICES, 0
+  field :FULL_SCAN, 1
+end
+
 defmodule Envoy.Extensions.LoadBalancingPolicies.LeastRequest.V3.LeastRequest do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
@@ -18,5 +25,14 @@ defmodule Envoy.Extensions.LoadBalancingPolicies.LeastRequest.V3.LeastRequest do
     type: Envoy.Extensions.LoadBalancingPolicies.Common.V3.LocalityLbConfig,
     json_name: "localityLbConfig"
 
-  field :enable_full_scan, 5, type: Google.Protobuf.BoolValue, json_name: "enableFullScan"
+  field :enable_full_scan, 5,
+    type: Google.Protobuf.BoolValue,
+    json_name: "enableFullScan",
+    deprecated: true
+
+  field :selection_method, 6,
+    type: Envoy.Extensions.LoadBalancingPolicies.LeastRequest.V3.LeastRequest.SelectionMethod,
+    json_name: "selectionMethod",
+    enum: true,
+    deprecated: false
 end

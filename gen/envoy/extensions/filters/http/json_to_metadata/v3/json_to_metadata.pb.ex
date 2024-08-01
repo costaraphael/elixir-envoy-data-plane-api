@@ -69,6 +69,10 @@ defmodule Envoy.Extensions.Filters.Http.JsonToMetadata.V3.JsonToMetadata.MatchRu
     deprecated: false
 
   field :allow_empty_content_type, 3, type: :bool, json_name: "allowEmptyContentType"
+
+  field :allow_content_types_regex, 4,
+    type: Envoy.Type.Matcher.V3.RegexMatcher,
+    json_name: "allowContentTypesRegex"
 end
 
 defmodule Envoy.Extensions.Filters.Http.JsonToMetadata.V3.JsonToMetadata do

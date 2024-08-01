@@ -163,6 +163,7 @@ defmodule Envoy.Config.Listener.V3.Listener do
 
   field :enable_mptcp, 30, type: :bool, json_name: "enableMptcp"
   field :ignore_global_conn_limit, 31, type: :bool, json_name: "ignoreGlobalConnLimit"
+  field :bypass_overload_manager, 35, type: :bool, json_name: "bypassOverloadManager"
 end
 
 defmodule Envoy.Config.Listener.V3.ListenerManager do

@@ -35,6 +35,10 @@ defmodule Envoy.Extensions.Filters.Http.LocalRatelimit.V3.LocalRateLimit do
     type: :bool,
     json_name: "localRateLimitPerDownstreamConnection"
 
+  field :local_cluster_rate_limit, 16,
+    type: Envoy.Extensions.Common.Ratelimit.V3.LocalClusterRateLimit,
+    json_name: "localClusterRateLimit"
+
   field :enable_x_ratelimit_headers, 12,
     type: Envoy.Extensions.Common.Ratelimit.V3.XRateLimitHeadersRFCVersion,
     json_name: "enableXRatelimitHeaders",

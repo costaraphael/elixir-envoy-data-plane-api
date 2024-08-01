@@ -28,6 +28,15 @@ defmodule Envoy.Config.Core.V3.TrafficDirection do
   field :OUTBOUND, 2
 end
 
+defmodule Envoy.Config.Core.V3.KeyValueAppend.KeyValueAppendAction do
+  use Protobuf, enum: true, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :APPEND_IF_EXISTS_OR_ADD, 0
+  field :ADD_IF_ABSENT, 1
+  field :OVERWRITE_IF_EXISTS_OR_ADD, 2
+  field :OVERWRITE_IF_EXISTS, 3
+end
+
 defmodule Envoy.Config.Core.V3.HeaderValueOption.HeaderAppendAction do
   use Protobuf, enum: true, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
@@ -125,13 +134,15 @@ defmodule Envoy.Config.Core.V3.Metadata do
     repeated: true,
     type: Envoy.Config.Core.V3.Metadata.FilterMetadataEntry,
     json_name: "filterMetadata",
-    map: true
+    map: true,
+    deprecated: false
 
   field :typed_filter_metadata, 2,
     repeated: true,
     type: Envoy.Config.Core.V3.Metadata.TypedFilterMetadataEntry,
     json_name: "typedFilterMetadata",
-    map: true
+    map: true,
+    deprecated: false
 end
 
 defmodule Envoy.Config.Core.V3.RuntimeUInt32 do
@@ -164,6 +175,31 @@ defmodule Envoy.Config.Core.V3.RuntimeFeatureFlag do
     deprecated: false
 
   field :runtime_key, 2, type: :string, json_name: "runtimeKey", deprecated: false
+end
+
+defmodule Envoy.Config.Core.V3.KeyValue do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :key, 1, type: :string, deprecated: false
+  field :value, 2, type: :bytes
+end
+
+defmodule Envoy.Config.Core.V3.KeyValueAppend do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :entry, 1, type: Envoy.Config.Core.V3.KeyValue, deprecated: false
+
+  field :action, 2,
+    type: Envoy.Config.Core.V3.KeyValueAppend.KeyValueAppendAction,
+    enum: true,
+    deprecated: false
+end
+
+defmodule Envoy.Config.Core.V3.KeyValueMutation do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :append, 1, type: Envoy.Config.Core.V3.KeyValueAppend
+  field :remove, 2, type: :string, deprecated: false
 end
 
 defmodule Envoy.Config.Core.V3.QueryParameter do
@@ -222,6 +258,28 @@ defmodule Envoy.Config.Core.V3.DataSource do
     json_name: "environmentVariable",
     oneof: 0,
     deprecated: false
+
+  field :watched_directory, 5,
+    type: Envoy.Config.Core.V3.WatchedDirectory,
+    json_name: "watchedDirectory"
+end
+
+defmodule Envoy.Config.Core.V3.RetryPolicy.RetryPriority do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  oneof :config_type, 0
+
+  field :name, 1, type: :string, deprecated: false
+  field :typed_config, 2, type: Google.Protobuf.Any, json_name: "typedConfig", oneof: 0
+end
+
+defmodule Envoy.Config.Core.V3.RetryPolicy.RetryHostPredicate do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  oneof :config_type, 0
+
+  field :name, 1, type: :string, deprecated: false
+  field :typed_config, 2, type: Google.Protobuf.Any, json_name: "typedConfig", oneof: 0
 end
 
 defmodule Envoy.Config.Core.V3.RetryPolicy do
@@ -233,6 +291,21 @@ defmodule Envoy.Config.Core.V3.RetryPolicy do
     type: Google.Protobuf.UInt32Value,
     json_name: "numRetries",
     deprecated: false
+
+  field :retry_on, 3, type: :string, json_name: "retryOn"
+
+  field :retry_priority, 4,
+    type: Envoy.Config.Core.V3.RetryPolicy.RetryPriority,
+    json_name: "retryPriority"
+
+  field :retry_host_predicate, 5,
+    repeated: true,
+    type: Envoy.Config.Core.V3.RetryPolicy.RetryHostPredicate,
+    json_name: "retryHostPredicate"
+
+  field :host_selection_retry_max_attempts, 6,
+    type: :int64,
+    json_name: "hostSelectionRetryMaxAttempts"
 end
 
 defmodule Envoy.Config.Core.V3.RemoteDataSource do

@@ -5,11 +5,20 @@ defmodule Envoy.Extensions.Filters.Http.AwsRequestSigning.V3.AwsRequestSigning.S
   field :AWS_SIGV4A, 1
 end
 
+defmodule Envoy.Extensions.Filters.Http.AwsRequestSigning.V3.AwsRequestSigning.QueryString do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :expiration_time, 1,
+    type: Google.Protobuf.Duration,
+    json_name: "expirationTime",
+    deprecated: false
+end
+
 defmodule Envoy.Extensions.Filters.Http.AwsRequestSigning.V3.AwsRequestSigning do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
   field :service_name, 1, type: :string, json_name: "serviceName", deprecated: false
-  field :region, 2, type: :string, deprecated: false
+  field :region, 2, type: :string
   field :host_rewrite, 3, type: :string, json_name: "hostRewrite"
   field :use_unsigned_payload, 4, type: :bool, json_name: "useUnsignedPayload"
 
@@ -22,6 +31,10 @@ defmodule Envoy.Extensions.Filters.Http.AwsRequestSigning.V3.AwsRequestSigning d
     type: Envoy.Extensions.Filters.Http.AwsRequestSigning.V3.AwsRequestSigning.SigningAlgorithm,
     json_name: "signingAlgorithm",
     enum: true
+
+  field :query_string, 7,
+    type: Envoy.Extensions.Filters.Http.AwsRequestSigning.V3.AwsRequestSigning.QueryString,
+    json_name: "queryString"
 end
 
 defmodule Envoy.Extensions.Filters.Http.AwsRequestSigning.V3.AwsRequestSigningPerRoute do

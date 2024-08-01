@@ -212,6 +212,10 @@ defmodule Envoy.Config.Bootstrap.V3.Bootstrap do
   field :grpc_async_client_manager_config, 40,
     type: Envoy.Config.Bootstrap.V3.Bootstrap.GrpcAsyncClientManagerConfig,
     json_name: "grpcAsyncClientManagerConfig"
+
+  field :memory_allocator_manager, 41,
+    type: Envoy.Config.Bootstrap.V3.MemoryAllocatorManager,
+    json_name: "memoryAllocatorManager"
 end
 
 defmodule Envoy.Config.Bootstrap.V3.Admin do
@@ -378,4 +382,14 @@ defmodule Envoy.Config.Bootstrap.V3.CustomInlineHeader do
     json_name: "inlineHeaderType",
     enum: true,
     deprecated: false
+end
+
+defmodule Envoy.Config.Bootstrap.V3.MemoryAllocatorManager do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :bytes_to_release, 1, type: :uint64, json_name: "bytesToRelease"
+
+  field :memory_release_interval, 2,
+    type: Google.Protobuf.Duration,
+    json_name: "memoryReleaseInterval"
 end

@@ -41,6 +41,11 @@ defmodule Envoy.Data.Core.V3.HealthCheckEvent do
     json_name: "addHealthyEvent",
     oneof: 0
 
+  field :successful_health_check_event, 12,
+    type: Envoy.Data.Core.V3.HealthCheckSuccessful,
+    json_name: "successfulHealthCheckEvent",
+    oneof: 0
+
   field :health_check_failure_event, 7,
     type: Envoy.Data.Core.V3.HealthCheckFailure,
     json_name: "healthCheckFailureEvent",
@@ -75,6 +80,10 @@ defmodule Envoy.Data.Core.V3.HealthCheckAddHealthy do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
   field :first_check, 1, type: :bool, json_name: "firstCheck"
+end
+
+defmodule Envoy.Data.Core.V3.HealthCheckSuccessful do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 end
 
 defmodule Envoy.Data.Core.V3.HealthCheckFailure do

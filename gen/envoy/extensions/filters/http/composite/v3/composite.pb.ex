@@ -24,4 +24,8 @@ defmodule Envoy.Extensions.Filters.Http.Composite.V3.ExecuteFilterAction do
     type: Envoy.Extensions.Filters.Http.Composite.V3.DynamicConfig,
     json_name: "dynamicConfig",
     deprecated: false
+
+  field :sample_percent, 3,
+    type: Envoy.Config.Core.V3.RuntimeFractionalPercent,
+    json_name: "samplePercent"
 end

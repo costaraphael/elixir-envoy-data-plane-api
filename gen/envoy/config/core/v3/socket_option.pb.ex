@@ -6,6 +6,21 @@ defmodule Envoy.Config.Core.V3.SocketOption.SocketState do
   field :STATE_LISTENING, 2
 end
 
+defmodule Envoy.Config.Core.V3.SocketOption.SocketType.Stream do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+end
+
+defmodule Envoy.Config.Core.V3.SocketOption.SocketType.Datagram do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+end
+
+defmodule Envoy.Config.Core.V3.SocketOption.SocketType do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :stream, 1, type: Envoy.Config.Core.V3.SocketOption.SocketType.Stream
+  field :datagram, 2, type: Envoy.Config.Core.V3.SocketOption.SocketType.Datagram
+end
+
 defmodule Envoy.Config.Core.V3.SocketOption do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
@@ -21,6 +36,8 @@ defmodule Envoy.Config.Core.V3.SocketOption do
     type: Envoy.Config.Core.V3.SocketOption.SocketState,
     enum: true,
     deprecated: false
+
+  field :type, 7, type: Envoy.Config.Core.V3.SocketOption.SocketType
 end
 
 defmodule Envoy.Config.Core.V3.SocketOptionsOverride do

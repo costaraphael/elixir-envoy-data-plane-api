@@ -73,6 +73,7 @@ defmodule Envoy.Config.Endpoint.V3.LocalityLbEndpoints do
   oneof :lb_config, 0
 
   field :locality, 1, type: Envoy.Config.Core.V3.Locality
+  field :metadata, 9, type: Envoy.Config.Core.V3.Metadata
 
   field :lb_endpoints, 2,
     repeated: true,

@@ -83,4 +83,32 @@ defmodule Envoy.Extensions.Filters.Http.GrpcJsonTranscoder.V3.GrpcJsonTranscoder
     type: Google.Protobuf.UInt32Value,
     json_name: "maxResponseBodySize",
     deprecated: false
+
+  field :capture_unknown_query_parameters, 17,
+    type: :bool,
+    json_name: "captureUnknownQueryParameters"
+end
+
+defmodule Envoy.Extensions.Filters.Http.GrpcJsonTranscoder.V3.UnknownQueryParams.Values do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :values, 1, repeated: true, type: :string
+end
+
+defmodule Envoy.Extensions.Filters.Http.GrpcJsonTranscoder.V3.UnknownQueryParams.KeyEntry do
+  use Protobuf, map: true, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :key, 1, type: :string
+
+  field :value, 2,
+    type: Envoy.Extensions.Filters.Http.GrpcJsonTranscoder.V3.UnknownQueryParams.Values
+end
+
+defmodule Envoy.Extensions.Filters.Http.GrpcJsonTranscoder.V3.UnknownQueryParams do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :key, 1,
+    repeated: true,
+    type: Envoy.Extensions.Filters.Http.GrpcJsonTranscoder.V3.UnknownQueryParams.KeyEntry,
+    map: true
 end

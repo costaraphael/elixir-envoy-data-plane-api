@@ -28,6 +28,7 @@ defmodule Envoy.Extensions.Filters.Http.ExtAuthz.V3.ExtAuthz do
 
   field :clear_route_cache, 6, type: :bool, json_name: "clearRouteCache"
   field :status_on_error, 7, type: Envoy.Type.V3.HttpStatus, json_name: "statusOnError"
+  field :validate_mutations, 24, type: :bool, json_name: "validateMutations"
 
   field :metadata_context_namespaces, 8,
     repeated: true,
@@ -69,11 +70,27 @@ defmodule Envoy.Extensions.Filters.Http.ExtAuthz.V3.ExtAuthz do
     type: Envoy.Type.Matcher.V3.ListStringMatcher,
     json_name: "allowedHeaders"
 
+  field :disallowed_headers, 25,
+    type: Envoy.Type.Matcher.V3.ListStringMatcher,
+    json_name: "disallowedHeaders"
+
   field :include_tls_session, 18, type: :bool, json_name: "includeTlsSession"
 
   field :charge_cluster_response_stats, 20,
     type: Google.Protobuf.BoolValue,
     json_name: "chargeClusterResponseStats"
+
+  field :encode_raw_headers, 23, type: :bool, json_name: "encodeRawHeaders"
+
+  field :decoder_header_mutation_rules, 26,
+    type: Envoy.Config.Common.MutationRules.V3.HeaderMutationRules,
+    json_name: "decoderHeaderMutationRules"
+
+  field :enable_dynamic_metadata_ingestion, 27,
+    type: Google.Protobuf.BoolValue,
+    json_name: "enableDynamicMetadataIngestion"
+
+  field :filter_metadata, 28, type: Google.Protobuf.Struct, json_name: "filterMetadata"
 end
 
 defmodule Envoy.Extensions.Filters.Http.ExtAuthz.V3.BufferSettings do

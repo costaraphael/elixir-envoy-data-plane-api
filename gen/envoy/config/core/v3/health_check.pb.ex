@@ -81,6 +81,10 @@ defmodule Envoy.Config.Core.V3.HealthCheck.TcpHealthCheck do
 
   field :send, 1, type: Envoy.Config.Core.V3.HealthCheck.Payload
   field :receive, 2, repeated: true, type: Envoy.Config.Core.V3.HealthCheck.Payload
+
+  field :proxy_protocol_config, 3,
+    type: Envoy.Config.Core.V3.ProxyProtocolConfig,
+    json_name: "proxyProtocolConfig"
 end
 
 defmodule Envoy.Config.Core.V3.HealthCheck.RedisHealthCheck do
@@ -200,6 +204,10 @@ defmodule Envoy.Config.Core.V3.HealthCheck do
   field :always_log_health_check_failures, 19,
     type: :bool,
     json_name: "alwaysLogHealthCheckFailures"
+
+  field :always_log_health_check_success, 26,
+    type: :bool,
+    json_name: "alwaysLogHealthCheckSuccess"
 
   field :tls_options, 21,
     type: Envoy.Config.Core.V3.HealthCheck.TlsOptions,

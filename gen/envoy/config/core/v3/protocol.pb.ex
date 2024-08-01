@@ -53,6 +53,11 @@ defmodule Envoy.Config.Core.V3.QuicProtocolOptions do
 
   field :connection_options, 6, type: :string, json_name: "connectionOptions"
   field :client_connection_options, 7, type: :string, json_name: "clientConnectionOptions"
+
+  field :idle_network_timeout, 8,
+    type: Google.Protobuf.Duration,
+    json_name: "idleNetworkTimeout",
+    deprecated: false
 end
 
 defmodule Envoy.Config.Core.V3.UpstreamHttpProtocolOptions do
@@ -283,6 +288,8 @@ defmodule Envoy.Config.Core.V3.Http3ProtocolOptions do
     type: :bool,
     json_name: "allowExtendedConnect",
     deprecated: false
+
+  field :allow_metadata, 6, type: :bool, json_name: "allowMetadata"
 end
 
 defmodule Envoy.Config.Core.V3.SchemeHeaderTransformation do
@@ -295,4 +302,6 @@ defmodule Envoy.Config.Core.V3.SchemeHeaderTransformation do
     json_name: "schemeToOverwrite",
     oneof: 0,
     deprecated: false
+
+  field :match_upstream, 2, type: :bool, json_name: "matchUpstream"
 end

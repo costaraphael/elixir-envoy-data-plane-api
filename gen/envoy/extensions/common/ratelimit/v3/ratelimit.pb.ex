@@ -52,3 +52,7 @@ defmodule Envoy.Extensions.Common.Ratelimit.V3.LocalRateLimitDescriptor do
     json_name: "tokenBucket",
     deprecated: false
 end
+
+defmodule Envoy.Extensions.Common.Ratelimit.V3.LocalClusterRateLimit do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+end

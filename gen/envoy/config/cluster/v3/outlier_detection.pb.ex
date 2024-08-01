@@ -98,4 +98,10 @@ defmodule Envoy.Config.Cluster.V3.OutlierDetection do
   field :successful_active_health_check_uneject_host, 23,
     type: Google.Protobuf.BoolValue,
     json_name: "successfulActiveHealthCheckUnejectHost"
+
+  field :monitors, 24, repeated: true, type: Envoy.Config.Core.V3.TypedExtensionConfig
+
+  field :always_eject_one_host, 25,
+    type: Google.Protobuf.BoolValue,
+    json_name: "alwaysEjectOneHost"
 end

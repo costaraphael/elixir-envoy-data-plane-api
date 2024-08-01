@@ -14,6 +14,9 @@ defmodule Envoy.Extensions.Filters.Http.JwtAuthn.V3.JwtProvider do
 
   field :issuer, 1, type: :string
   field :audiences, 2, repeated: true, type: :string
+  field :subjects, 19, type: Envoy.Type.Matcher.V3.StringMatcher
+  field :require_expiration, 20, type: :bool, json_name: "requireExpiration"
+  field :max_lifetime, 21, type: Google.Protobuf.Duration, json_name: "maxLifetime"
 
   field :remote_jwks, 3,
     type: Envoy.Extensions.Filters.Http.JwtAuthn.V3.RemoteJwks,
@@ -68,7 +71,7 @@ end
 defmodule Envoy.Extensions.Filters.Http.JwtAuthn.V3.RemoteJwks do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
-  field :http_uri, 1, type: Envoy.Config.Core.V3.HttpUri, json_name: "httpUri"
+  field :http_uri, 1, type: Envoy.Config.Core.V3.HttpUri, json_name: "httpUri", deprecated: false
 
   field :cache_duration, 2,
     type: Google.Protobuf.Duration,
@@ -222,6 +225,8 @@ defmodule Envoy.Extensions.Filters.Http.JwtAuthn.V3.JwtAuthentication do
     type: Envoy.Extensions.Filters.Http.JwtAuthn.V3.JwtAuthentication.RequirementMapEntry,
     json_name: "requirementMap",
     map: true
+
+  field :strip_failure_response, 6, type: :bool, json_name: "stripFailureResponse"
 end
 
 defmodule Envoy.Extensions.Filters.Http.JwtAuthn.V3.PerRouteConfig do

@@ -16,6 +16,7 @@ defmodule Envoy.Extensions.TransportSockets.Tls.V3.SubjectAltNameMatcher.SanType
   field :DNS, 2
   field :URI, 3
   field :IP_ADDRESS, 4
+  field :OTHER_NAME, 5
 end
 
 defmodule Envoy.Extensions.TransportSockets.Tls.V3.CertificateValidationContext.TrustChainVerification do
@@ -115,6 +116,11 @@ defmodule Envoy.Extensions.TransportSockets.Tls.V3.SubjectAltNameMatcher do
     deprecated: false
 
   field :matcher, 2, type: Envoy.Type.Matcher.V3.StringMatcher, deprecated: false
+  field :oid, 3, type: :string
+end
+
+defmodule Envoy.Extensions.TransportSockets.Tls.V3.CertificateValidationContext.SystemRootCerts do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 end
 
 defmodule Envoy.Extensions.TransportSockets.Tls.V3.CertificateValidationContext do
@@ -129,6 +135,10 @@ defmodule Envoy.Extensions.TransportSockets.Tls.V3.CertificateValidationContext 
     type: Envoy.Extensions.TransportSockets.Tls.V3.CertificateProviderPluginInstance,
     json_name: "caCertificateProviderInstance",
     deprecated: false
+
+  field :system_root_certs, 17,
+    type: Envoy.Extensions.TransportSockets.Tls.V3.CertificateValidationContext.SystemRootCerts,
+    json_name: "systemRootCerts"
 
   field :watched_directory, 11,
     type: Envoy.Config.Core.V3.WatchedDirectory,

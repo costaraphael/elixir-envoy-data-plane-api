@@ -8,4 +8,6 @@ defmodule Envoy.Extensions.Network.DnsResolver.Cares.V3.CaresDnsResolverConfig d
   field :dns_resolver_options, 2,
     type: Envoy.Config.Core.V3.DnsResolverOptions,
     json_name: "dnsResolverOptions"
+
+  field :udp_max_queries, 5, type: Google.Protobuf.UInt32Value, json_name: "udpMaxQueries"
 end

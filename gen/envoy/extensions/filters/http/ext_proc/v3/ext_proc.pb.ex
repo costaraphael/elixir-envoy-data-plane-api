@@ -1,3 +1,11 @@
+defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.ExternalProcessor.RouteCacheAction do
+  use Protobuf, enum: true, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :DEFAULT, 0
+  field :CLEAR, 1
+  field :RETAIN, 2
+end
+
 defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.ExternalProcessor do
   use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
 
@@ -12,7 +20,6 @@ defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.ExternalProcessor do
     type: Envoy.Extensions.Filters.Http.ExtProc.V3.ProcessingMode,
     json_name: "processingMode"
 
-  field :async_mode, 4, type: :bool, json_name: "asyncMode"
   field :request_attributes, 5, repeated: true, type: :string, json_name: "requestAttributes"
   field :response_attributes, 6, repeated: true, type: :string, json_name: "responseAttributes"
 
@@ -32,8 +39,6 @@ defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.ExternalProcessor do
     json_name: "maxMessageTimeout",
     deprecated: false
 
-  field :disable_clear_route_cache, 11, type: :bool, json_name: "disableClearRouteCache"
-
   field :forward_rules, 12,
     type: Envoy.Extensions.Filters.Http.ExtProc.V3.HeaderForwardingRules,
     json_name: "forwardRules"
@@ -41,6 +46,46 @@ defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.ExternalProcessor do
   field :filter_metadata, 13, type: Google.Protobuf.Struct, json_name: "filterMetadata"
   field :allow_mode_override, 14, type: :bool, json_name: "allowModeOverride"
   field :disable_immediate_response, 15, type: :bool, json_name: "disableImmediateResponse"
+
+  field :metadata_options, 16,
+    type: Envoy.Extensions.Filters.Http.ExtProc.V3.MetadataOptions,
+    json_name: "metadataOptions"
+
+  field :observability_mode, 17, type: :bool, json_name: "observabilityMode"
+
+  field :disable_clear_route_cache, 11,
+    type: :bool,
+    json_name: "disableClearRouteCache",
+    deprecated: false
+
+  field :route_cache_action, 18,
+    type: Envoy.Extensions.Filters.Http.ExtProc.V3.ExternalProcessor.RouteCacheAction,
+    json_name: "routeCacheAction",
+    enum: true,
+    deprecated: false
+
+  field :deferred_close_timeout, 19,
+    type: Google.Protobuf.Duration,
+    json_name: "deferredCloseTimeout"
+end
+
+defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.MetadataOptions.MetadataNamespaces do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :untyped, 1, repeated: true, type: :string
+  field :typed, 2, repeated: true, type: :string
+end
+
+defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.MetadataOptions do
+  use Protobuf, syntax: :proto3, protoc_gen_elixir_version: "0.12.0"
+
+  field :forwarding_namespaces, 1,
+    type: Envoy.Extensions.Filters.Http.ExtProc.V3.MetadataOptions.MetadataNamespaces,
+    json_name: "forwardingNamespaces"
+
+  field :receiving_namespaces, 2,
+    type: Envoy.Extensions.Filters.Http.ExtProc.V3.MetadataOptions.MetadataNamespaces,
+    json_name: "receivingNamespaces"
 end
 
 defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.HeaderForwardingRules do
@@ -75,4 +120,13 @@ defmodule Envoy.Extensions.Filters.Http.ExtProc.V3.ExtProcOverrides do
   field :request_attributes, 3, repeated: true, type: :string, json_name: "requestAttributes"
   field :response_attributes, 4, repeated: true, type: :string, json_name: "responseAttributes"
   field :grpc_service, 5, type: Envoy.Config.Core.V3.GrpcService, json_name: "grpcService"
+
+  field :metadata_options, 6,
+    type: Envoy.Extensions.Filters.Http.ExtProc.V3.MetadataOptions,
+    json_name: "metadataOptions"
+
+  field :grpc_initial_metadata, 7,
+    repeated: true,
+    type: Envoy.Config.Core.V3.HeaderValue,
+    json_name: "grpcInitialMetadata"
 end

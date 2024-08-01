@@ -14,6 +14,7 @@ defmodule Envoy.Type.Matcher.V3.StringMatcher do
     deprecated: false
 
   field :contains, 7, type: :string, oneof: 0, deprecated: false
+  field :custom, 8, type: Xds.Core.V3.TypedExtensionConfig, oneof: 0
   field :ignore_case, 6, type: :bool, json_name: "ignoreCase"
 end
 
